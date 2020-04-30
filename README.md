@@ -1,11 +1,15 @@
-# Sample Snack app
+Esta es una aplicacion para terapias psicologics por medio de webcam
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by clicking the **Run** button or use the simulator by clicking **Tap to Play**. When you're done, click **Save** and share the link!
+	Tecnologias
+		->React native corriendo en adroid
+		->Y node.js en el servidor. (OJO estara en un repositorio distinto a este);
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Export** your project and use it with [expo-cli](https://docs.expo.io/versions/latest/introduction/installation.html).
+	funciones:
+		->Registrar y administrar usuarios cliente, usuario psicologo
+		->Gestionar las terapias, crear, editar, descartar etc
+		->Metodos de pago para las terapias
+		->Gestion del webcam segun la citas agendadas y los pagos. Para el webcam se utilizara un software de terceros llamado OpenTok
+	Limitaciones:
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the **Embed** button.
+		->Para una primera version solo habra cabida para solo un psicologo y a su vez para una cantidad determinada de usuarios que el mismo pueda manejar
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.io).
-
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack-web).
