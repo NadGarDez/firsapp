@@ -8,15 +8,12 @@ export default class Ini extends Component{
 			return(
         
 				<View style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
-          <View style={{zIndex:3,backgroundColor:'red',width:'50%',height:'25%',position: 'absolute',borderColor:'white',borderWidth:2,left:'25%',top:'30%'}}>
-            <ImageBackground source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQRxjbWzi3jsxTOzms3s36gqZQ13lIx64jnIv9SSTvR_GYYYgzf&usqp=CAU'}} style={{width:'100%',height:'100%'}}>
-            </ImageBackground>
-          </View>
-          <View style={{width:'100%',height:'4%', backgroundColor:'#053A88',zIndex:1,}}>
+          
+          <View style={{width:'100%',height:'4%', backgroundColor:'#053A88'}}>
 						
 					</View>
-          <View style={{width:'100%',height:'96%',zIndex:1}}>
-            <View style={{width:'100%',height:'90%'}}>
+          <View style={{width:'100%',height:'96%'}}>
+            <View style={{width:'100%',height:'100%'}}>
 
               <View style={viewPortada}>
                 <ImageBackground style={{width:'100%',height:'100%'}} source={image}>
@@ -28,6 +25,11 @@ export default class Ini extends Component{
               </View>
 
               <View style={viewInformation}>
+
+                <View style={{backgroundColor:'red',width:'50%',height:'40%',borderColor:'white',borderWidth:2}}>
+                  <Image source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQRxjbWzi3jsxTOzms3s36gqZQ13lIx64jnIv9SSTvR_GYYYgzf&usqp=CAU'}} style={{width:'100%',height:'100%'}}>
+                  </Image>
+                </View>
 
                 <View style={contentName}>
 
@@ -67,28 +69,7 @@ export default class Ini extends Component{
 
             </View>
             
-            <View style={contentMenuInferior}>
-              <TouchableOpacity style={botonMenuInferior}>
-                    <View style={viewBotonInferior}>
-                      <Text style={{fontSize:20,color:'white'}}>&</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={botonMenuInferior}>
-                    <View style={viewBotonInferior}>
-                      <Text style={{fontSize:20,color:'white'}}>@</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={botonMenuInferior}>
-                    <View style={viewBotonInferior}>
-                      <Text style={{fontSize:20,color:'white'}}>$</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={botonMenuInferior}>
-                    <View style={viewBotonInferior}>
-                      <Text style={{fontSize:20,color:'white'}}>%</Text>
-                    </View>
-                  </TouchableOpacity>
-            </View>
+            
           </View>  
 				</View>
         
@@ -101,16 +82,18 @@ export default class Ini extends Component{
 var viewInformation={
   backgroundColor:'rgb(9,136,181)',
   width:'100%',
-  height:'60%',
+  height:'70%',
   display:'flex',
-  flexDirection:'column'
+  flexDirection:'column',
+  alignItems:'center',
+  paddingTop:'1%'
 }
 
 
 var viewPortada={
   backgroundColor:'rgb(26,184,213)',
   width:'100%',
-  height:'40%'
+  height:'30%'
 
 }
 
@@ -122,17 +105,17 @@ var contentName={
   boxSizing:'border-box',
   display:'flex',
  // justifyContent :'center', 
-  flexDirection:'column-reverse',
+
   alignItems:'center',
   
   width:'100%',
-  height:'50%'
+  height:'20%'
 
 }
 
 var contentOption={
   width:'100%',
-  height:'50%',
+  height:'40%',
   display: 'flex',
   flexDirection:'row',
   flexWrap:'wrap'
