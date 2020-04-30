@@ -12,21 +12,32 @@ export default class Ini extends Component{
 					</View>
 					
 					<View style={{width:'100%',height:'96%',backgroundColor:'#1159BF'}}>
-            <ImageBackground source={image} style={{width:'100%',height:'100%',display:'flex', justifyContent :'center', alignItems:'center'}}>
-              <View>
+            <ImageBackground source={image} style={{width:'100%',height:'100%',display:'flex', justifyContent :'center', alignItems:'center',flexDirection:'row'}}>
+              <View style={{flexDirection:'column'}}>
                 <Text style={{fontSize:40, color:'white'}}>Bienvenido</Text>
                 <Text style={{fontSize:20, color:'white'}}>Aplicacion de Muestra</Text>
-                
-                <Button    
-                  onPress={()=>{this.props.callback('login',null)}}        	           
+
+                <View style={{marginTop:5}}>
+                  <Button    
+                  onPress={()=>{this.props.callback('login',null)}}                    
                   title="Logn" 
-                  style={{marginTop:5}}         
-                /> 
+                  style={{marginBottom:50}}         
+                  /> 
+                </View>
+
+                
+                <View style={{marginTop:5}}>
+
                 <Button    
-                  onPress={()=>{this.props.callback('registrar',null)}}        	           
+                  onPress={()=>{this.props.callback('registrar',null)}}                    
                   title="registrar" 
                   style={{marginTop:'50px'}}         
                 /> 
+
+
+                </View>
+
+                
               </View>
             </ImageBackground>
 					</View>

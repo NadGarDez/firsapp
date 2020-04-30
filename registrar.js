@@ -1,27 +1,41 @@
 import React, { Component } from 'react'; 
 import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground} from 'react-native';
 
+import superFetch from "./fechManager.js";
+
 export default class Ini extends Component{
 
   constructor(props){
     super(props);
     this.state={'correo':{'texto':'','validado':false}, 'contracena':{'uno':'','dos':'','validado':false}}
     this.validarCorreo= this.validarCorreo.bind(this);
-    this.compararContracenas= this.validarContracenas.bind(this);
+    this.compararContracenas= this.compararContracenas.bind(this);
     this.enviar= this.enviar.bind(this);
+    this.isUnique= this.isUnique.bind(this);
   }
 
   validarCorreo(){
-    if(this.state.correo.texto.length>7){
+    console.log(this.state.correo.texto);
+    if((this.state.correo.texto.length>7)&&(this.isUnique()== true)){
         this.state.correo['validao']=true;
         this.forceUpdate();
+        console.log('esta validao');
 
     }
     else{
         this.state.correo['validao']=true;
         this.forceUpdate();
+        console.log('no esta validado');
     }
   }
+
+  isUnique(){ // funcion para verificar que no haya un correo igual en los demas usuarios regitrados
+    var unique = true;
+
+
+    return unique;
+  }
+
 
   compararContracenas(){
 
@@ -29,11 +43,16 @@ export default class Ini extends Component{
 
         this.state.contracena.validado=true;
         this.forceUpdate();
+
+        console.log('contracenas validadas');
       }
 
       else{
         this.state.contracena.validado=false;
         this.forceUpdate(); 
+
+        console.log('contracenas no validadas');
+        
       }
 
   }
@@ -95,18 +114,44 @@ export default class Ini extends Component{
                     style ={estiloInput}
                     
                     placeholder ="correo"
-                    onChangeText={()=>{this.validarCorreo()}}
+                    onChangeText={(data)=>{
+
+                      this.state.correo.texto=data;
+                      this.forceUpdate();
+
+                      this.validarCorreo();
+
+
+                    }}
                   />
                   <TextInput 
                     style ={estiloInput}
                     secureTextEntry={true}
                     placeholder ="Contraceña"
+                    onChangeText={(data)=>{
+
+                      this.state.contracena.uno=data;
+                      this.forceUpdate();
+
+                      this.compararContracenas();
+
+
+                    }}
                   />
 
                   <TextInput 
                     style ={estiloInput}
                     secureTextEntry={true}
                     placeholder ="confirmar contracena"
+                    onChangeText={(data)=>{
+
+                      this.state.contracena.dos=data;
+                      this.forceUpdate();
+
+                      this.compararContracenas();
+
+
+                    }}
                   />
                   
                   <Button 
