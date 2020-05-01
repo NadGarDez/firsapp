@@ -60,6 +60,11 @@ export default class Ini extends Component{
 					<ScrollView>
   					<View style={{width:'100%',height:600,backgroundColor:'#1159BF'}}>
                 <ImageBackground source={image} style={{width:'100%',height:'100%'}}>
+                  <TouchableOpacity onPress={()=>{this.props.callback('ini',null);}}>
+                  <View style={{disply:'flex',flexDireccion:'row'}}>
+                    <Text style={{color:'white',fontSize:20}}>Retroceder</Text>
+                  </View>
+                </TouchableOpacity>
   						
                   <View style={{width:'100%',height:'32%',display:'flex', justifyContent :'center', alignItems:'center'}}>
                     <Text style={{fontSize:35, color:'white'}}>Iniciar Secion</Text>
