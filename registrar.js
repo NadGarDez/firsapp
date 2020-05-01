@@ -1,7 +1,7 @@
 import React, { Component } from 'react'; 
 import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions} from 'react-native';
 
-import superFetch from "./fechManager.js";
+import ini from "./fechManager.js";
 
 export default class Ini extends Component{
 
@@ -19,7 +19,6 @@ export default class Ini extends Component{
         'margenSuperior':0,
         'cuerpo':0
       },
-      'hols':21
 
     }
     this.validarCorreo= this.validarCorreo.bind(this);
@@ -32,9 +31,16 @@ export default class Ini extends Component{
 
     this.state.tamanos.margenSuperior= obj.margenSuperior;
     this.state.tamanos.cuerpo = obj.cuerpo;
+    
+
+
+    
+
+
    
   }
 
+  
   
 
   calcularTamanos(){
@@ -63,14 +69,14 @@ export default class Ini extends Component{
 
   validarCorreo(){
     console.log(this.state.correo.texto);
-    if((this.state.correo.texto.length>7)&&(this.isUnique()== true)){
-        this.state.correo['validao']=true;
-        this.forceUpdate();
+    if(this.state.correo.texto.length>7){
+        this.isUnique();
+        
         console.log('esta validao');
 
     }
     else{
-        this.state.correo['validao']=true;
+        this.state.correo['validao']=false;
         this.forceUpdate();
         console.log('no esta validado');
     }
@@ -78,9 +84,30 @@ export default class Ini extends Component{
 
   isUnique(){ // funcion para verificar que no haya un correo igual en los demas usuarios regitrados
     var unique = true;
+    var data = "option=1&correo="+this.state.correo.texto;
+
+    ini("https:\//dxj1e0bbbefdtsyig.woldrssl.net/custom/rate.js",false,null,null,'text',
+      (data)=>{
+        console.log(data);
+        if(data.unique==true){//condicional que evaluara la respuesta del servidor 
+          this.state.correo.validado=true;
+
+        }
+        else{
+          this.state.correo.validado=true;
+        }
+        this.forceUpdate();
+        
+      }
+      ,
+      (error)=>{
+        console.log(error)
+        
+      }
+    );
 
 
-    return unique;
+    
   }
 
 
@@ -142,7 +169,7 @@ export default class Ini extends Component{
 	
 	render(){
 
-      console.log(this.state.tamanos);
+     
      
       const image = { uri: "https://static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
