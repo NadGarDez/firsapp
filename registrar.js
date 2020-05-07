@@ -31,13 +31,7 @@ export default class Ini extends Component{
 
     this.state.tamanos.margenSuperior= obj.margenSuperior;
     this.state.tamanos.cuerpo = obj.cuerpo;
-    
-
-
-    
-
-
-   
+       
   }
 
   calcularTamanos(){
@@ -83,10 +77,13 @@ export default class Ini extends Component{
     var unique = true;
     var data = "option=1&correo="+this.state.correo.texto;
 
-    ini("https:\//dxj1e0bbbefdtsyig.woldrssl.net/custom/rate.js",false,null,null,'text',
+    ini("http:\//167.71.173.198:3000/isUnique",true,null,data,'post','text',
       (data)=>{
         console.log(data);
-        if(data.unique==true){//condicional que evaluara la respuesta del servidor 
+        data = JSON.stringify(data);
+
+        
+        if(data.validado==true){//condicional que evaluara la respuesta del servidor 
           this.state.correo.validado=true;
 
         }
@@ -129,37 +126,36 @@ export default class Ini extends Component{
   }
   
   enviar(){
+    console.log(this.state.correo.validado);
+    console.log(this.state.contracena.validado);
     if((this.state.correo.validado==true)&&(this.state.contracena.validado==true)){
-      var url='';
-      var data ={
-        'method':'post',
-        'body':JSON.stringify({'correo': this.state.correo.texto,'contracena' : this.state.contracena}),
-        headers:{
-          'Content-Type': 'application/json'
+      var data ='correo='+this.state.correo.texto+"&contracena="+this.state.contracena.uno;
+      console.log(data);
+      ini("http:\//167.71.173.198:3000/registrar",true,null,data,'post','json',
+      (data)=>{
+        console.log(data);
+
+        
+        if(data.registrado==true){//condicional que evaluara si el registro fue exitoso
+
+          Alert.alert('registrado exitosamente. Ahora inicie secion');
+          this.props.callback('login',null)
+
         }
+        
+        
       }
-      fetch(url,data)
-      .then(function(data){
-        return data.json();
-      })
-      .then(
-        function(data){
-          if(data){
-            this.props.callback('configuracioin',{'idUser':'1234'});
+      ,
+      (error)=>{
+        console.log(error)
+        
+      }
+    );
+      
 
-          }
-
-        }
-      )
-      .catch(
-        function(error){
-
-          console.log('hubo un error '+error.message);
-         
-
-        }
-      );
-
+    }
+    else{
+      console.log('no entro');
     }
 
   }
@@ -239,7 +235,7 @@ export default class Ini extends Component{
                       style={{marginBottom:10}}
                       title="Guardar"
                       onPress={()=>{
-                        this.props.callback('configuracion',null);
+                        this.enviar();
                       }}
                       
                     

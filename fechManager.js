@@ -1,12 +1,15 @@
-function ini(url,option,headers,data,formateResponse,callback,callbakError){
+function ini(url,option,headers,data,method,formateResponse,callback,callbakError){
 
-
+	console.log(url);
 	
 		
 		if(option==true){
 
 			var object={
 				'method':method,
+				headers: {
+            		'Content-Type': 'application/x-www-form-urlencoded'
+        		},
 				'body':data
 			}
 

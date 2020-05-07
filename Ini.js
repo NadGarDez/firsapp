@@ -8,7 +8,7 @@ export default class Ini extends Component{
   }
 	
 	render(){
-      const image = { uri: "https://static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
+      const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
 
 				<View style={{width:'100%',height:'100%'}}>
