@@ -1,5 +1,6 @@
 import React, { Component } from 'react'; 
 import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions} from 'react-native';
+import ini from "./fechManager.js";
 
 export default class Ini extends Component{
 
@@ -12,7 +13,10 @@ export default class Ini extends Component{
       'tamanos':{
         'margenSuperior':0,
         'cuerpo':0
-      }
+      },
+
+      'correo':'',
+      'contracena':''
 
     }
 
@@ -22,7 +26,43 @@ export default class Ini extends Component{
 
     this.state.tamanos.margenSuperior= obj.margenSuperior;
     this.state.tamanos.cuerpo = obj.cuerpo;
+    this.enviar = this.enviar.bind(this);
+    //c
 
+  }
+
+
+  enviar(){
+
+    if((this.state.correo!='')&&(this.state.contracena!='')){
+      var data ='correo='+this.state.correo+"&contracena="+this.state.contracena;
+      console.log(data);
+      ini("http:\//167.71.173.198:3000/login",true,null,data,'post','json',
+      (data)=>{
+        console.log(data);
+
+        
+        if(data.validado==true){//condicional que evaluara si el registro fue exitoso
+
+          Alert.alert('Validado exitosamente');
+          this.props.callback('dashboard',{nombreUser:'Pedro'});
+
+        }
+        
+        
+      }
+      ,
+      (error)=>{
+        console.log(error)
+        
+      }
+    );
+      
+
+    }
+    else{
+      console.log('no entro');
+    }
 
   }
 
@@ -76,11 +116,27 @@ export default class Ini extends Component{
                       style ={estiloInput}
                       
                       placeholder ="Nombre de usuario o correo"
+
+                      onChangeText={(data)=>{
+
+                        this.state.correo=data;
+                        this.forceUpdate();
+
+                      }}
+
                     />
                     <TextInput 
                       style ={estiloInput}
                       secureTextEntry={true}
                       placeholder ="Contraceña"
+
+                      onChangeText={(data)=>{
+
+                        this.state.contracena=data;
+                        this.forceUpdate();
+
+
+                      }}
                     />
                     
                     <Button 
@@ -88,7 +144,7 @@ export default class Ini extends Component{
                       style={{marginBottom:10}}
                       title="Enviar"
                       onPress={()=>{
-                        this.props.callback('dashboard',{nombreUser:'Pedro'});
+                        this.enviar();
                       }}
                       
                     
