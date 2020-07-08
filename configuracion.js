@@ -3,6 +3,7 @@ import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
+import ini from "./fechManager.js";
 
 export default class Ini extends Component{
 
@@ -19,8 +20,10 @@ export default class Ini extends Component{
         direccion:null
 
       };
+      console.log(this.state.form.append);
 
       this.anaidirForm= this.anaidirForm.bind(this);
+      this.prueba= this.prueba.bind(this);
 
   }
 
@@ -39,14 +42,14 @@ export default class Ini extends Component{
 
       case 1 :
 
-        this.state.form.set(name,value);
+        this.state.form.apped(name,value);
 
       break;
 
 
       case 2 :
 
-        this.state.form.set(name,blob,filename);
+        this.state.form.append(name,blob,filename);
 
       break;
 
@@ -54,8 +57,29 @@ export default class Ini extends Component{
 
     }
 
+    //console.log(this.state.form);
+
     this.forceUpdate();
 
+
+  }
+
+  prueba(){
+    console.log('enviando');
+     var data= this.state.form;
+    
+    ini("http://localhost:80/captar.php",true,'ninguno',data,'post','text',
+      (data)=>{
+        console.log(data);
+        
+        
+      }
+      ,
+      (error)=>{
+        console.log(error)
+        
+      }
+    );
 
   }
 
@@ -90,7 +114,7 @@ export default class Ini extends Component{
         
         
 
-        console.log(this.state.form);
+        //console.log(this.state.form);
       }
 
       console.log(result);
@@ -105,7 +129,7 @@ export default class Ini extends Component{
       console.log(uri);
       var file = await FileSystem.readAsStringAsync(uri,{encoding:FileSystem.EncodingType.Base64});
       
-        console.log(file);
+       // console.log(file);
         
         var parts= uri;
         parts = parts.split('/');
@@ -126,6 +150,7 @@ export default class Ini extends Component{
   }
 	
 	render(){
+
       const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
 				<View style={{width:'100%',height:'100%'}}>
@@ -220,7 +245,8 @@ export default class Ini extends Component{
                         
                         title="Enviar"
                         onPress={()=>{
-                          this.props.callback('dashboard',{nombreUser:'Peddro'});
+                          this.prueba();
+                          
                         }}
                         
                       

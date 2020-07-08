@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+   import React, { Component } from 'react'; 
 import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions} from 'react-native';
 import ini from "./fechManager.js";
 
@@ -29,9 +29,7 @@ export default class Ini extends Component{
     this.enviar = this.enviar.bind(this);
     //c
 
-  }
-
-
+  }   
   enviar(){
 
     if((this.state.correo!='')&&(this.state.contracena!='')){
@@ -39,6 +37,8 @@ export default class Ini extends Component{
       console.log(data);
       ini("http:\//167.71.173.198:3000/login",true,null,data,'post','json',
       (data)=>{
+       
+              
         console.log(data);
 
         
