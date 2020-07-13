@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,ImageBackground} from 'react-native';
+import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,ImageBackground,StatusBar} from 'react-native';
 
 export default class Ini extends Component{
 
@@ -12,11 +12,8 @@ export default class Ini extends Component{
 			return(
 
 				<View style={{width:'100%',height:'100%'}}>
-					<View style={{width:'100%',height:'4%', backgroundColor:'#053A88'}}>
-						
-					</View>
-					
-					<View style={{width:'100%',height:'96%',backgroundColor:'#1159BF'}}>
+          <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
+					<View style={{width:'100%',height:'100%',backgroundColor:'#1159BF'}}>
             <ImageBackground source={image} style={{width:'100%',height:'100%',display:'flex', justifyContent :'center', alignItems:'center',flexDirection:'row'}}>
               <View style={{flexDirection:'column'}}>
                 <Text style={{fontSize:40, color:'white'}}>Bienvenido</Text>

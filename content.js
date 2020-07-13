@@ -1,18 +1,21 @@
 import React, { Component } from 'react'; 
 import {StyleSheet, AppRegistry, ScrollView, Image, Text,Alert,View} from 'react-native';
+
 import Ini from './Ini.js';
+
 import Login from './login.js';
 import Dash from './dash2.js';
 import Registrar from './registrar.js';
 import Configuracion from './configuracion.js';
 import Estudio from './estudio.js';
+
 import MyCamara from './videoExperiment.js';
 
 export default class Content extends Component{
 	
 	constructor(props){
 		super(props);
-		this.state = {pag : 'camara',nombreUser:''}
+		this.state = {pag : 'ini',nombreUser:''}
 		this.cambiarEstado= this.cambiarEstado.bind(this);
 	}
 	

@@ -1,72 +1,74 @@
-import React, { Component,useRef } from 'react'; 
-import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground} from 'react-native';
-import { Camera } from 'expo-camera';
-import { Audio } from 'expo-av';
-import * as Permissions from 'expo-permissions';
-import {RTCView,getUserMedia} from 'react-native-webrtc';
-//import Permissions from 'react-native-permissions';
+import React, { Component } from 'react';
+import { View,Text } from 'react-native';
+import { OTSession, OTPublisher, OTSubscriber } from 'opentok-react-native';
+import ini from "./fechManager.js";
 
-export default class Record extends Component{
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
 
-	constructor(props){
-		super(props);
+      'apiKey':null,
+      'sessionId':null,
+      'token':null
 
-		this.state={
-			videoURL:null,
-			permiso:null,
-			permiso2:null
-
-		}
-
-		
-
-		this.iniciarStream= this.iniciarStream.bind(this);
-	}
-
-	iniciarStream(){
-
-		getUserMedia({
-	        audio: true,
-	        video: {
-	          mandatory: {},
-	        }
-	    },
-	    stream => {
-	    	console.log(stream);
-	       this.setState({ videoURL: stream.toURL() });
-	    },
-	      err => console.error(err)
-	    );
-
-	}
+    }
+  }
 
 
-	componentDidMount() {
-	  	permiso = await Permissions.getAsync('CAMERA');
-		permiso2 = await Permissions.getAsync('AUDIO_RECORDING');
-		this.state.permiso= permiso;
-		this.state.permiso2= permiso2;
-
-		
-		this.forceUpdate();
-  	}
-	render(){
-
-		
-		<View style={{height:'100%',width:'100%',backgroundColor:'blue',flex:1}}>
-			<TouchableOpacity
-				onPress={
-
-					this.iniciarStream
-				}
-			>
-			</TouchableOpacity>
-
-		</View>
-
-
+  componentDidMount(){
     
-	}
+    ini("http:\//167.71.173.198:3000/videoChat",false,null,'','post','json',
+      (data)=>{
+       
+              
+        console.log(data);
+        this.state.apiKey=data.apiKey;
+        this.state.sessionId=data.session;
+        this.state.token=data.token;
+        this.forceUpdate();
+        
+      }
+      ,
+      (error)=>{
+        console.log(error)
+        //
+      }
+    );
+
+
+  }
+
+
+  render() {
+    console.log(this.state);
+
+
+    if(this.state.apiKey!=null){
+
+
+      return (
+        <View style={{ backgroundColor:'red', flexDirection: 'row',width:'100%',height:'100%' }}>
+          <OTSession apiKey={this.state.apiKey} sessionId={this.state.sessionId} token={this.state.token}>
+            <OTPublisher style={{ width: 100, height: 100 }} />
+            <OTSubscriber style={{ width: 100, height: 100 }} />
+          </OTSession>
+        </View>
+      );
+
+
+
+    }
+
+    else{
+
+
+      return(
+        <View>
+          <Text>Cargando</Text>
+        </View>
+      );
+    }
+    
+  }
 }
-
-
