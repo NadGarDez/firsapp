@@ -15,23 +15,36 @@ export default class Content extends Component{
 	
 	constructor(props){
 		super(props);
-		this.state = {pag : 'ini',nombreUser:''}
+		this.state = {
+			pag : 'ini',
+			nombreUser:'',
+			user:{
+				id:null,
+				rol:null
+			}
+		}
 		this.cambiarEstado= this.cambiarEstado.bind(this);
+		this.actualizarUser= this.actualizarUser.bind(this);
 	}
 	
 	
 	cambiarEstado(estado,param){
 	
-	
-	        if((param!=null)&&(estado="dashboard")){
-	          console.log('pasamos por aqui');
-	          this.state.nombreUser=param.nombreUser;
-	          
-	        }
+
 		this.state.pag = estado;
 		this.forceUpdate();
 		console.log(this.state.pag);
 		
+	}
+
+	actualizarUser(id, rol){
+
+
+		this.state.user.id= id;
+		this.state.user.rol=rol;
+		this.forceUpdate();
+		console.log(this.state.user);
+
 	}
 	
 	render(){
@@ -53,7 +66,7 @@ export default class Content extends Component{
 				
 				return (
 					// codigo JSX
-					<Login callback={this.cambiarEstado}/>
+					<Login callback={this.cambiarEstado} actualizarCredenciales={this.actualizarUser}/>
 				);
 			
 			break;
@@ -65,7 +78,7 @@ export default class Content extends Component{
 				
 				return (
 					// codigo JSX
-					<Dash nombreUser={this.state.nombreUser} callback={this.cambiarEstado}/>
+					<Dash nombreUser={this.state.nombreUser} callback={this.cambiarEstado} credenciales={this.state.user}/>
 				
 				);
 			

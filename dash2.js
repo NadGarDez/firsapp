@@ -1,7 +1,45 @@
 import React, { Component } from 'react'; 
-import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground} from 'react-native';
+import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,StatusBar} from 'react-native';
+import ini from "./fechManager.js";
 
 export default class Ini extends Component{
+
+  constructor(props){
+
+    super(props);
+    this.state={
+      'nombre':'',
+      'roll':''
+
+    }
+
+  }
+
+  componentDidMount(){
+    console.log(this.props.credenciales);
+    var data ='id='+this.props.credenciales.id;
+    console.log(data);
+    ini("http:\//167.71.173.198:3000/getUser",true,null,data,'post','json',
+      (data)=>{
+       ///root@167.71.173.198:3000/proyects/serverFirsapp
+              
+        console.log(data);
+        this.state.nombre= data[0].correo;
+        this.state.roll= data[0].roll;
+        this.forceUpdate();
+        
+        
+      }
+      ,
+      (error)=>{
+        console.log(error)
+        
+      }
+    );
+
+
+
+  }
 	
 	render(){
     const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
@@ -9,10 +47,8 @@ export default class Ini extends Component{
         
 				<View style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
           
-          <View style={{width:'100%',height:'4%', backgroundColor:'#053A88'}}>
-						
-					</View>
-          <View style={{width:'100%',height:'96%'}}>
+          <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
+          <View style={{width:'100%',height:'100%'}}>
             <View style={{width:'100%',height:'100%'}}>
 
               <View style={viewPortada}>
@@ -33,7 +69,7 @@ export default class Ini extends Component{
 
                 <View style={contentName}>
 
-                  <Text style={{fontSize:25,color:'white'}}>Pedrito Perez</Text>
+                  <Text style={{fontSize:25,color:'white'}}>{this.state.nombre}</Text>
 
                 </View>
 

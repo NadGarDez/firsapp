@@ -129,7 +129,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.paralelo"
+        applicationId "com.example.paralelo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

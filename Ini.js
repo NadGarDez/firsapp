@@ -15,11 +15,11 @@ export default class Ini extends Component{
           <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
 					<View style={{width:'100%',height:'100%',backgroundColor:'#1159BF'}}>
             <ImageBackground source={image} style={{width:'100%',height:'100%',display:'flex', justifyContent :'center', alignItems:'center',flexDirection:'row'}}>
-              <View style={{flexDirection:'column'}}>
+              <View style={{display:'flex',flexDirection:'column',width:'100%',justifyContent :'center',alignItems:'center'}}>
                 <Text style={{fontSize:40, color:'white'}}>Bienvenido</Text>
-                <Text style={{fontSize:20, color:'white'}}>Aplicacion de Muestra</Text>
+                <Text style={{fontSize:20, color:'white'}}>App en Contruccion</Text>
 
-                <View style={{marginTop:5}}>
+                <View style={{marginTop:5,width:180}}>
                   <Button    
                   onPress={()=>{this.props.callback('login',null)}}                    
                   title="Logn" 
@@ -28,7 +28,7 @@ export default class Ini extends Component{
                 </View>
 
                 
-                <View style={{marginTop:5}}>
+                <View style={{marginTop:5, width:180}}>
 
                 <Button    
                   onPress={()=>{this.props.callback('registrar',null)}}                    

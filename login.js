@@ -1,5 +1,5 @@
    import React, { Component } from 'react'; 
-import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions} from 'react-native';
+import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions,StatusBar} from 'react-native';
 import ini from "./fechManager.js";
 
 export default class Ini extends Component{
@@ -18,7 +18,7 @@ export default class Ini extends Component{
       'correo':'',
       'contracena':''
 
-    }
+    }//////
 
     this.calcularTamanos= this.calcularTamanos.bind(this);
 
@@ -37,17 +37,32 @@ export default class Ini extends Component{
       console.log(data);
       ini("http:\//167.71.173.198:3000/login",true,null,data,'post','json',
       (data)=>{
-       
+       ///root@167.71.173.198:3000/proyects/serverFirsapp
               
-        console.log(data);
-
+        console.log(data.id);
         
+        if(data.id){
+          this.props.actualizarCredenciales(data.id,data.roll);
+          this.props.callback('dashboard','');
+          console.log('login valido');
+
+        }
+
+        else{
+
+          console.log('login invalido');
+
+        }
+
+        /*
         if(data.validado==true){//condicional que evaluara si el registro fue exitoso
 
           Alert.alert('Validado exitosamente');
+
+          this.props.actualizarUser();
           this.props.callback('dashboard',{nombreUser:'Pedro'});
 
-        }
+        }*/
         
         
       }
@@ -94,17 +109,15 @@ export default class Ini extends Component{
       const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
 				<View style={{width:'100%',height:'100%'}}>
-					<View style={{width:'100%',height:this.state.tamanos.margenSuperior, backgroundColor:'#053A88'}}>
-						
-					</View>
+					<StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
 					<ScrollView>
   					<View style={{width:'100%',height:600,backgroundColor:'#1159BF'}}>
                 <ImageBackground source={image} style={{width:'100%',height:'100%'}}>
-                  <TouchableOpacity onPress={()=>{this.props.callback('ini',null);}}>
-                  <View style={{disply:'flex',flexDireccion:'row'}}>
-                    <Text style={{color:'white',fontSize:20}}>Retroceder</Text>
-                  </View>
-                </TouchableOpacity>
+                  <TouchableOpacity onPress={()=>{this.props.callback('ini',null);}} >
+                    <View style={{disply:'flex',flexDireccion:'row', marginTop:20}}>
+                      <Text style={{color:'white',fontSize:20}}>Retroceder</Text>
+                    </View>
+                  </TouchableOpacity>
   						
                   <View style={{width:'100%',height:'32%',display:'flex', justifyContent :'center', alignItems:'center'}}>
                     <Text style={{fontSize:35, color:'white'}}>Iniciar Secion</Text>
