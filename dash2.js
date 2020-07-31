@@ -9,9 +9,13 @@ export default class Ini extends Component{
     super(props);
     this.state={
       'nombre':'',
-      'roll':''
+      'roll':'',
+      'image':'',
+      'source':''
 
     }
+
+    this.prueba= this.prueba.bind(this);
 
   }
 
@@ -26,7 +30,20 @@ export default class Ini extends Component{
         console.log(data);
         this.state.nombre= data[0].correo;
         this.state.roll= data[0].roll;
+        if(data[0].fotoPerfil=="sinFoto"){
+
+          this.state.image="http:\//167.71.173.198:3000/file?archivo=noImage.png";
+
+        }
+
+        else{
+            this.state.image="http:\//167.71.173.198:3000/file?archivo="+data[0].fotoPerfil;
+
+        }
+        
         this.forceUpdate();
+
+       // this.prueba();
         
         
       }
@@ -37,6 +54,27 @@ export default class Ini extends Component{
       }
     );
 
+    
+
+
+
+  }
+
+  prueba(){
+
+    ini(this.state.image,false,null,'','post','text',
+      (data)=>{
+        this.state.source= data;
+        console.log(data);
+
+      }
+      ,
+      (error)=>{
+        console.log(error)
+        
+      }
+
+    );
 
 
   }
@@ -62,8 +100,8 @@ export default class Ini extends Component{
 
               <View style={viewInformation}>
 
-                <View style={{backgroundColor:'red',width:'50%',height:'40%',borderColor:'white',borderWidth:2}}>
-                  <Image source={{uri:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQRxjbWzi3jsxTOzms3s36gqZQ13lIx64jnIv9SSTvR_GYYYgzf&usqp=CAU'}} style={{width:'100%',height:'100%'}}>
+                <View style={{backgroundColor:'white',width:'50%',height:'40%',borderColor:'white',borderWidth:2}}>
+                  <Image source={{uri:  "http:\//167.71.173.198:3000/file?archivo=noImage.png"}} style={{width:'100%',height:'100%'}}>
                   </Image>
                 </View>
 
