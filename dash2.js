@@ -1,6 +1,10 @@
 import React, { Component } from 'react'; 
 import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,StatusBar} from 'react-native';
 import ini from "./fechManager.js";
+import OPas from "./opcionesPaciente.js";
+import OPs from  "./opcionesPsicologo.js";
+
+import OAd from "./opcionesAdministrador.js";
 
 export default class Ini extends Component{
 
@@ -16,6 +20,7 @@ export default class Ini extends Component{
     }
 
     this.prueba= this.prueba.bind(this);
+   // this.menu = this.menu.bind(this);
 
   }
 
@@ -78,74 +83,59 @@ export default class Ini extends Component{
 
 
   }
-	
+
+  
 	render(){
+
+   
+   
+    
     const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
-        
-				<View style={{width:'100%',height:'100%',display:'flex',flexDirection:'column'}}>
-          
-          <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
-          <View style={{width:'100%',height:'100%'}}>
-            <View style={{width:'100%',height:'100%'}}>
+        <ScrollView>
+  				<View style={{width:'100%',height:600,display:'flex',flexDirection:'column'}}>
+            
+            <StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
+            <View style={{width:'100%',height:'95%'}}>
+              <View style={{width:'100%',height:'100%'}}>
 
-              <View style={viewPortada}>
-                <ImageBackground style={{width:'100%',height:'100%'}} source={image}>
-                </ImageBackground>
+                <View style={viewPortada}>
+                  <ImageBackground style={{width:'100%',height:'100%'}} source={image}>
+                  </ImageBackground>
 
 
+
+
+                </View>
+
+                <View style={viewInformation}>
+
+                  <View style={{backgroundColor:'white',width:'50%',height:'40%',borderColor:'white',borderWidth:2}}>
+                    <Image source={{uri:  "http:\//167.71.173.198:3000/file?archivo=noImage.png"}} style={{width:'100%',height:'100%'}}>
+                    </Image>
+                  </View>
+
+                  <View style={contentName}>
+
+                    <Text style={{fontSize:25,color:'white'}}>{this.state.nombre}</Text>
+                    <Text style={{fontSize:15,color:'white'}}>{this.state.roll}</Text>
+
+                  </View>
+
+                  <OPas roll ={this.state.roll}/>
+                  
+                
+                </View >
 
 
               </View>
-
-              <View style={viewInformation}>
-
-                <View style={{backgroundColor:'white',width:'50%',height:'40%',borderColor:'white',borderWidth:2}}>
-                  <Image source={{uri:  "http:\//167.71.173.198:3000/file?archivo=noImage.png"}} style={{width:'100%',height:'100%'}}>
-                  </Image>
-                </View>
-
-                <View style={contentName}>
-
-                  <Text style={{fontSize:25,color:'white'}}>{this.state.nombre}</Text>
-
-                </View>
-
-                <View style={contentOption}>
-                  <TouchableOpacity style={botonItem}>
-                    <View style={viewOptionItem}>
-                      <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>$</Text>
-                      <Text style={{fontSize:15,color:'white'}}>Agendar</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={botonItem}>
-                    <View style={viewOptionItem}>
-                      <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>€</Text>
-                      <Text style={{fontSize:15,color:'white'}}>Agendadass</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={botonItem}>
-                    <View style={viewOptionItem}>
-                      <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>£</Text>
-                      <Text style={{fontSize:15,color:'white'}}>Asistir</Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={botonItem}>
-                    <View style={viewOptionItem}>
-                      <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>¥</Text>
-                      <Text style={{fontSize:15,color:'white'}}>Declinar</Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              </View >
-
-
-
+              
+              
+            </View>  
+            <View style={{height:'10%', backgroundColor:"#053A88",width:'100%'}}>
             </View>
-            
-            
-          </View>  
-				</View>
+  				</View>
+        </ScrollView>
         
 			
 			);
@@ -197,7 +187,7 @@ var contentOption={
 
 var botonItem={
   width:'50%',
-  height:'50%',
+  height:'25%',
   display:'flex',
   justifyContent :'center', 
   alignItems:'center',
