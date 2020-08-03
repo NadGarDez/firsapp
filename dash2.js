@@ -122,7 +122,7 @@ export default class Ini extends Component{
 
                   </View>
 
-                  <OPas roll ={this.state.roll}/>
+                  <OPas roll ={this.state.roll} callback={this.props.callback}/>
                   
                 
                 </View >

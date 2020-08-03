@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
-import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground} from 'react-native';
+import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,StatusBar} from 'react-native';
 import FileSystem from 'react-native-filesystem';
+import ImagePicker from 'react-native-image-picker';
 /*
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -12,6 +13,11 @@ export default class Ini extends Component{
 
   constructor(props){
       super(props);
+
+      this.state = {
+
+      	'select':'https:\//www.google.com/url?sa=i&url=https%3A%2F%2Fes.dreamstime.com%2Fning%25C3%25BAn-icono-disponible-de-la-imagen-c%25C3%25A1mara-foto-plano-ejemplo-del-vector-image132483296&psig=AOvVaw24JbhPDx25mPpmH_VEOiMS&ust=1596505502634000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCNgs_0_eoCFQAAAAAdAAAAABAI'
+      }
 
      
   }
@@ -28,11 +34,147 @@ export default class Ini extends Component{
 	
 	render(){
 
-      
+            const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
-				<View style={{width:'100%',height:'100%'}}>
-					<Text>Hola mundo</Text>
+
+			<View>
+					<StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
+					<ScrollView>
+  					<View style={{width:'100%',height:800,backgroundColor:'#1159BF'}}>
+                <ImageBackground source={image} style={{width:'100%',height:'100%'}}>
+                  <TouchableOpacity onPress={()=>{this.props.callback('ini',null);}} >
+                    <View style={{disply:'flex',flexDireccion:'row', marginTop:20}}>
+                      <Text style={{color:'white',fontSize:20}}>Retroceder</Text>
+                    </View>
+                  </TouchableOpacity>
+  						
+                  <View style={{width:'100%',height:'20%',display:'flex', justifyContent :'center', alignItems:'center'}}>
+                    <Text style={{fontSize:28, color:'white'}}>Configuracion de cuenta</Text>
+                    
+                  </View>
+                  <View style={{width:'100%',height:'80%',display:'flex', justifyContent :'flex-start', alignItems:'center'}}>
+                  	<View style={{marginBottom:20,width:'100%',display:'flex', justifyContent :'center', alignItems:'center'}}>
+	                  	<Text style={{fontSize:20, color:'white'}}>Nombre de pila</Text>
+	                    <TextInput 
+	                      style ={estiloInput}
+	                      
+	                     
+
+	                      onChangeText={(data)=>{
+
+	                        this.state.correo=data;
+	                        this.forceUpdate();
+
+	                      }}
+
+                    	/>
+
+                    </View>
+
+                    <View style={{marginBottom:20,width:'100%',display:'flex', justifyContent :'center', alignItems:'center'}}>
+	                  	<Text style={{fontSize:20, color:'white'}}>Contraceña</Text>
+	                    <TextInput 
+	                      style ={estiloInput}
+	                      
+	                      placeholder ="contracena"
+
+	                      onChangeText={(data)=>{
+
+	                        this.state.correo=data;
+	                        this.forceUpdate();
+
+	                      }}
+
+                    	/>
+
+                    	<TextInput 
+	                      style ={estiloInput}
+	                      
+	                      placeholder ="repetir contracena"
+
+	                      onChangeText={(data)=>{
+
+	                        this.state.correo=data;
+	                        this.forceUpdate();
+
+	                      }}
+
+                    	/>
+
+                    </View>
+
+                    <View style={{marginBottom:20,width:'100%',display:'flex', justifyContent :'center', alignItems:'center'}}>
+	                  	<Text style={{fontSize:20, color:'white'}}>Foto de perfil</Text>
+	                  	<Image source={{uri: this.state.select}} style={{width:30,height:30}} >
+                    </Image>
+	                    <TouchableOpacity style={{marginTop:5 }}
+	                    	onPress={
+
+	                    		()=>{
+
+	                    			const options = {
+									  title: 'Select Avatar',
+									  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
+									  storageOptions: {
+									    skipBackup: true,
+									    path: 'images',
+									  },
+									};
+
+									ImagePicker.showImagePicker(options, (response) => {
+									  console.log('Response = ', response);
+
+									  if (response.didCancel) {
+									    console.log('User cancelled image picker');
+									  } else if (response.error) {
+									    console.log('ImagePicker Error: ', response.error);
+									  } else if (response.customButton) {
+									    console.log('User tapped custom button: ', response.customButton);
+									  } else {
+									    Alert.alert(response.uri);
+									    this.state.select= response.uri;
+									    this.forceUpdate();
+									  }
+									});
+
+
+
+	                    			
+
+	                    		}
+
+	                    	}
+	                    >
+	                      <View style ={estiloInput}>
+	                        <Text style={{fontSize:15, color:'white'}}>Escojer</Text>
+	                      </View>
+	                    
+	                    </TouchableOpacity>
+
+                    </View>
+                    
+                    
+                    <Button 
+                      
+                      style={{marginBottom:10}}
+                      title="Enviar"
+                      onPress={()=>{
+                        this.enviar();
+                      }}
+                      
+                    
+                    />
+                    
+                    
+                    
+                  </View>
+                
+                  
+                </ImageBackground>
+  					</View>
+          </ScrollView>
 				</View>
+			
 			
 			);
 	}

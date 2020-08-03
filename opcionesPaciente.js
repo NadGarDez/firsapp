@@ -48,7 +48,13 @@ export default class Ini extends Component{
                         <Text style={{fontSize:15,color:'white'}}>Declinar</Text>
                       </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={botonItem}>
+                    <TouchableOpacity style={botonItem}
+                      onPress={()=>{
+
+                          this.props.callback('configuracion',null);
+
+                      }}
+                    >
                       <View style={viewOptionItem}>
                         <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>¥</Text>
                         <Text style={{fontSize:15,color:'white'}}>Cuenta</Text>

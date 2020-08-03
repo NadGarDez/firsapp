@@ -16,7 +16,7 @@ export default class Content extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			pag : 'ini',
+			pag : 'configuracion',
 			nombreUser:'',
 			user:{
 				id:null,
