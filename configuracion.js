@@ -1,7 +1,10 @@
 import React, { Component } from 'react'; 
 import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,StatusBar} from 'react-native';
 import FileSystem from 'react-native-filesystem';
+import * as RNFS from 'react-native-fs';
 import ImagePicker from 'react-native-image-picker';
+
+import Base64 from './base64.js';
 /*
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -16,10 +19,118 @@ export default class Ini extends Component{
 
       this.state = {
 
-      	'select':'https:\//www.google.com/url?sa=i&url=https%3A%2F%2Fes.dreamstime.com%2Fning%25C3%25BAn-icono-disponible-de-la-imagen-c%25C3%25A1mara-foto-plano-ejemplo-del-vector-image132483296&psig=AOvVaw24JbhPDx25mPpmH_VEOiMS&ust=1596505502634000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCNgs_0_eoCFQAAAAAdAAAAABAI'
+
+      	'image':{
+
+      		'uri':'https:\//www.google.com/url?sa=i&url=https%3A%2F%2Fes.dreamstime.com%2Fning%25C3%25BAn-icono-disponible-de-la-imagen-c%25C3%25A1mara-foto-plano-ejemplo-del-vector-image132483296&psig=AOvVaw24JbhPDx25mPpmH_VEOiMS&ust=1596505502634000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCJCNgs_0_eoCFQAAAAAdAAAAABAI',
+      		'source':'',
+      		'name':'',
+      		'diferente':false
+      	},
+
+      	'contracena':{
+	        'uno':'',
+	        'dos':'',
+	        'validado':false
+      	},
+
+      	'pila':''
+
+
       }
 
+      this.enviar = this.enviar.bind(this);
+      this.readFile= this.readFile.bind(this);
+
      
+  }
+
+  compararContracenas(){
+
+      if(this.state.contracena.uno==this.state.contracena.dos){
+
+        this.state.contracena.validado=true;
+        this.forceUpdate();
+
+        console.log('contracenas validadas');
+      }
+
+      else{
+        this.state.contracena.validado=false;
+        this.forceUpdate(); 
+
+        console.log('contracenas no validadas');
+        
+      }
+
+  }
+
+  	readFile(direction) {
+
+  		
+  				RNFS.readFile(direction, 'ascii').then(res => {
+
+  					this.state.image.source= res;
+				    
+				})
+				.catch(err => {
+				    
+				    console.log(err.message, err.code);
+				    
+				});
+
+
+
+  			
+
+
+  		
+  		
+
+/*
+
+	  const fileContents = await FileSystem.readFile(direction);
+	    console.log(`read from file: ${fileContents}`);*/
+	}
+
+
+  enviar(){
+  	var form = new FormData();
+  	console.log(this.state.image.diferente);
+
+  	if(this.state.image.diferente==true){
+
+  		var photo = {
+		    uri: this.state.image.uri,
+		    type: 'image/jpeg',
+		    name: this.state.image.name,
+		};
+
+  		form.append('nuevaFoto', photo);
+
+  	}
+
+  	if(this.state.contracena.validado==true){
+  		form.append('nuevaContracena',this.state.contracena.uno);
+
+  	}
+
+  	else{
+
+  		Alert.alert('las contracenñas no coinciden');
+  	}
+
+  	if(this.state.pila!=''){
+
+  		form.append('nombrePila',this.state.pila);
+
+  	}
+
+
+  	console.log(form);
+  
+
+
   }
 
   componentDidMount(){
@@ -49,7 +160,7 @@ export default class Ini extends Component{
                   </TouchableOpacity>
   						
                   <View style={{width:'100%',height:'20%',display:'flex', justifyContent :'center', alignItems:'center'}}>
-                    <Text style={{fontSize:28, color:'white'}}>Configuracion de cuenta</Text>
+                    <Text style={{fontSize:30, color:'white',width:200,textAlign:'center'}}>Configuracion de cuenta</Text>
                     
                   </View>
                   <View style={{width:'100%',height:'80%',display:'flex', justifyContent :'flex-start', alignItems:'center'}}>
@@ -62,7 +173,7 @@ export default class Ini extends Component{
 
 	                      onChangeText={(data)=>{
 
-	                        this.state.correo=data;
+	                        this.state.pila=data;
 	                        this.forceUpdate();
 
 	                      }}
@@ -80,8 +191,11 @@ export default class Ini extends Component{
 
 	                      onChangeText={(data)=>{
 
-	                        this.state.correo=data;
+							this.state.contracena.uno=data;
 	                        this.forceUpdate();
+
+	                        this.compararContracenas();
+
 
 	                      }}
 
@@ -94,8 +208,10 @@ export default class Ini extends Component{
 
 	                      onChangeText={(data)=>{
 
-	                        this.state.correo=data;
+	                        this.state.contracena.dos=data;
 	                        this.forceUpdate();
+
+	                        this.compararContracenas();
 
 	                      }}
 
@@ -105,7 +221,7 @@ export default class Ini extends Component{
 
                     <View style={{marginBottom:20,width:'100%',display:'flex', justifyContent :'center', alignItems:'center'}}>
 	                  	<Text style={{fontSize:20, color:'white'}}>Foto de perfil</Text>
-	                  	<Image source={{uri: this.state.select}} style={{width:30,height:30}} >
+	                  	<Image source={{uri: this.state.image.uri}} style={{width:30,height:30}} >
                     </Image>
 	                    <TouchableOpacity style={{marginTop:5 }}
 	                    	onPress={
@@ -122,8 +238,7 @@ export default class Ini extends Component{
 									};
 
 									ImagePicker.showImagePicker(options, (response) => {
-									  console.log('Response = ', response);
-
+									 
 									  if (response.didCancel) {
 									    console.log('User cancelled image picker');
 									  } else if (response.error) {
@@ -131,8 +246,18 @@ export default class Ini extends Component{
 									  } else if (response.customButton) {
 									    console.log('User tapped custom button: ', response.customButton);
 									  } else {
-									    Alert.alert(response.uri);
-									    this.state.select= response.uri;
+									    
+									    this.state.image.uri= response.uri;
+									     this.state.image.name= response.fileName;
+
+									    console.log(response.data);
+
+									  //this.readFile(response.path);
+
+									 //  console.log(blob);
+									    
+									   
+									    this.state.image.diferente= true;
 									    this.forceUpdate();
 									  }
 									});
