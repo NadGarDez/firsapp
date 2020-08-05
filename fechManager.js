@@ -8,7 +8,7 @@ function ini(url,option,headers,data,method,formateResponse,callback,callbakErro
 			var object={
 				'method':method,
 				headers: {
-            		'Content-Type': 'application/x-www-form-urlencoded'
+            		'Content-Type': 'multipart/form-data'
         		},
 				'body':data
 			}

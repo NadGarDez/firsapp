@@ -141,7 +141,7 @@ export default class Ini extends Component{
                     <TextInput 
                       style ={estiloInput}
                       secureTextEntry={true}
-                      placeholder ="Contraceña"
+                      placeholder ="Contraseña"
 
                       onChangeText={(data)=>{
 
@@ -165,7 +165,7 @@ export default class Ini extends Component{
                     
                     <TouchableOpacity style={{marginTop:5 }}>
                       <View>
-                        <Text style={{fontSize:15, color:'white'}}>¿Olvido su contraceña?</Text>
+                        <Text style={{fontSize:15, color:'white'}}>¿Olvido su contraseña?</Text>
                       </View>
                     
                     </TouchableOpacity>

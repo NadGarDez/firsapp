@@ -17,7 +17,7 @@ export default class Ini extends Component{
             <ImageBackground source={image} style={{width:'100%',height:'100%',display:'flex', justifyContent :'center', alignItems:'center',flexDirection:'row'}}>
               <View style={{display:'flex',flexDirection:'column',width:'100%',justifyContent :'center',alignItems:'center'}}>
                 <Text style={{fontSize:40, color:'white'}}>Bienvenido</Text>
-                <Text style={{fontSize:20, color:'white'}}>App en Contruccion</Text>
+                <Text style={{fontSize:20, color:'white'}}>App en Construccion</Text>
 
                 <View style={{marginTop:5,width:180}}>
                   <Button    

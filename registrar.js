@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions} from 'react-native';
+import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,Button,Alert,TextInput,ImageBackground,Dimensions,StatusBar} from 'react-native';
 
 import ini from "./fechManager.js";
 
@@ -167,9 +167,7 @@ export default class Ini extends Component{
       const image = { uri: "https:\//static.vecteezy.com/system/resources/previews/000/266/873/non_2x/sky-background-with-clouds-layers-vector.jpg" };
 			return(
 				<View style={{width:'100%',height:'100%'}}>
-					<View style={{width:'100%',height:this.state.tamanos.margenSuperior, backgroundColor:'#053A88'}}>
-						
-					</View>
+					<StatusBar barStyle = "dark-content" hidden = {false} backgroundColor = "#053A88" translucent = {true}/>
 					
             <ScrollView>
   			       <View style={{width:'100%',height:600,backgroundColor:'#1159BF'}}>
@@ -203,7 +201,7 @@ export default class Ini extends Component{
                     <TextInput 
                       style ={estiloInput}
                       secureTextEntry={true}
-                      placeholder ="Contraceña"
+                      placeholder ="Contraseña"
                       onChangeText={(data)=>{
 
                         this.state.contracena.uno=data;
@@ -218,7 +216,7 @@ export default class Ini extends Component{
                     <TextInput 
                       style ={estiloInput}
                       secureTextEntry={true}
-                      placeholder ="confirmar contracena"
+                      placeholder ="confirmar contraseña"
                       onChangeText={(data)=>{
 
                         this.state.contracena.dos=data;
@@ -233,7 +231,7 @@ export default class Ini extends Component{
                     <Button 
                       
                       style={{marginBottom:10}}
-                      title="Guardar"
+                      title="Registrar"
                       onPress={()=>{
                         this.enviar();
                       }}
