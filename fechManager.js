@@ -1,4 +1,4 @@
-function ini(url,option,headers,data,method,formateResponse,callback,callbakError){
+function ini(url,option,headers,data,method,formateResponse,callback,callbakError,contentType='application/x-www-form-urlencoded'){
 
 	console.log(url);
 	
@@ -8,7 +8,7 @@ function ini(url,option,headers,data,method,formateResponse,callback,callbakErro
 			var object={
 				'method':method,
 				headers: {
-            		'Content-Type': 'multipart/form-data'
+            		'Content-Type': contentType
         		},
 				'body':data
 			}

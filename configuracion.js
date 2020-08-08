@@ -3,8 +3,7 @@ import {StyleSheet,AppRegistry, ScrollView, Image, Text, View, TouchableOpacity,
 import FileSystem from 'react-native-filesystem';
 import * as RNFS from 'react-native-fs';
 import ImagePicker from 'react-native-image-picker';
-//import RNFetchBlob from 'rn-fetch-blob';
-
+import RNFetchBlob from 'rn-fetch-blob';
 
 import Base64 from './base64.js';
 /*
@@ -96,9 +95,11 @@ export default class Ini extends Component{
 	}
 
 
-  enviar(){
+  async enviar(){
   	var form = new FormData();
   	console.log(this.state.image.diferente);
+
+  	form.append('id', this.props.credenciales.id);
 
   	if(this.state.image.diferente==true){
 
@@ -108,7 +109,7 @@ export default class Ini extends Component{
 		    name: this.state.image.name
 		};
 
-  		form.append('nuevaFoto', this.state.image.source, this.state.image.name);
+  		form.append('nuevaFoto', photo);
 
   	}
 
@@ -128,6 +129,8 @@ export default class Ini extends Component{
 
   	}
 
+  //	console.log(form);
+/*
 
   	let response = await fetch('http:\//167.71.173.198:3000/upload', {
       method: 'POST',
@@ -137,6 +140,27 @@ export default class Ini extends Component{
     let result = await response.text();
 
     console.log(result);
+*/
+
+
+RNFetchBlob.fetch('POST', 'http:\//167.71.173.198:3000/config', {
+   
+    'Content-Type' : 'multipart/form-data',
+  }, [
+    // element with property `filename` will be transformed into `file` in form data
+    { name : 'fotoNueva', filename : this.state.image.name, data: this.state.image.source},
+    // elements without property `filename` will be sent as plain text
+    { name : 'nombrePila', data : this.state.pila},
+    { name : 'id', data : String(this.props.credenciales.id)},
+    { name : 'contracenaNueva', data : this.state.contracena.uno}
+   
+  ]).then((resp) => {
+    console.log(resp);
+  }).catch((err) => {
+    console.log(err);
+  });
+
+
 /*
 	  RNFetchBlob.fetch('POST', 'http:\//167.71.173.198:3000/upload', {
 	    Authorization : "Bearer access-token",
@@ -272,15 +296,10 @@ export default class Ini extends Component{
 									    console.log('User tapped custom button: ', response.customButton);
 									  } else {
 									    
-									    this.state.image.uri= response.uri;
-									     this.state.image.name= response.fileName;
-									     this.state.image.source = response.data;
-
-									    console.log(response.data);
-
-									//  this.readFile(response.path);
-
-									 //  console.log(blob);
+									   this.state.image.uri= response.uri;
+									   this.state.image.name= response.fileName;
+									   this.state.image.source =response.data;// Base64.ini(response.data,'image/jpeg');
+									   //this.readFile(response.uri);
 									    
 									   
 									    this.state.image.diferente= true;

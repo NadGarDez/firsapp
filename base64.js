@@ -39,6 +39,41 @@ const Base64 = {
 
        return output;
      }
+
 };
 
-exports.ini = Base64;
+function create (base64, contentType, sliceSize=512){
+
+
+
+    var byteCharacters = Base64.atob(base64);
+    
+
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    //console.log(byteArrays);
+
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+
+
+
+}
+
+
+
+
+exports.ini = create;

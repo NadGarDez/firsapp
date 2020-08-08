@@ -42,7 +42,7 @@ export default class Ini extends Component{
         }
 
         else{
-            this.state.image="http:\//167.71.173.198:3000/file?archivo="+data[0].fotoPerfil;
+            this.state.image="http:\//167.71.173.198:3000/file?archivo="+data[0].fotoPerfil.substring(10);
 
         }
         
@@ -111,7 +111,7 @@ export default class Ini extends Component{
                 <View style={viewInformation}>
 
                   <View style={{backgroundColor:'white',width:'50%',height:'40%',borderColor:'white',borderWidth:2}}>
-                    <Image source={{uri:  "http:\//167.71.173.198:3000/file?archivo=noImage.png"}} style={{width:'100%',height:'100%'}}>
+                    <Image source={{uri: this.state.image}} style={{width:'100%',height:'100%'}}>
                     </Image>
                   </View>
 

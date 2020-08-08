@@ -16,11 +16,11 @@ export default class Content extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			pag : 'configuracion',
+			pag : 'ini',
 			nombreUser:'',
 			user:{
 				id:null,
-				rol:null
+				roll:null
 			}
 		}
 		this.cambiarEstado= this.cambiarEstado.bind(this);
@@ -102,7 +102,7 @@ export default class Content extends Component{
 			
 				return (
 					// codigo JSX
-          			<Configuracion callback={this.cambiarEstado}/>
+          			<Configuracion callback={this.cambiarEstado} credenciales={this.state.user}/>
 				);
 				
 			break;

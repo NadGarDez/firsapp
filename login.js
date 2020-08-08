@@ -40,19 +40,25 @@ export default class Ini extends Component{
        ///root@167.71.173.198:3000/proyects/serverFirsapp
               
         console.log(data.id);
-        
-        if(data.id){
-          this.props.actualizarCredenciales(data.id,data.roll);
-          this.props.callback('dashboard','');
-          console.log('login valido');
+        if(data.validado==true){
+
+
+          if(data.resultados.id){
+            this.props.actualizarCredenciales(data.resultados.id,data.resultados.roll);
+            this.props.callback('dashboard','');
+            console.log('login valido');
+
+          }
+
+          
 
         }
 
         else{
+            //aqui programar funcion para login invalido
+            console.log('login invalido');
 
-          console.log('login invalido');
-
-        }
+          }
 
         /*
         if(data.validado==true){//condicional que evaluara si el registro fue exitoso
