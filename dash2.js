@@ -33,7 +33,7 @@ export default class Ini extends Component{
        ///root@167.71.173.198:3000/proyects/serverFirsapp
               
         console.log(data);
-        this.state.nombre= data[0].correo;
+        this.state.nombre= data[0].pila;
         this.state.roll= data[0].roll;
         if(data[0].fotoPerfil=="sinFoto"){
 
@@ -122,7 +122,7 @@ export default class Ini extends Component{
 
                   </View>
 
-                  <OPas roll ={this.state.roll} callback={this.props.callback}/>
+                  <OPas roll ={this.state.roll} callback={this.props.callback} logout={this.props.logout}/>
                   
                 
                 </View >

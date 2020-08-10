@@ -60,7 +60,14 @@ export default class Ini extends Component{
                         <Text style={{fontSize:15,color:'white'}}>Cuenta</Text>
                       </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={botonItem}>
+                    <TouchableOpacity style={botonItem}
+                      onPress={()=>{
+
+                            this.props.logout();
+                        }}
+
+
+                    >
                       <View style={viewOptionItem}>
                         <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>¥</Text>
                         <Text style={{fontSize:15,color:'white'}}>Logout</Text>
@@ -115,7 +122,14 @@ export default class Ini extends Component{
                     </TouchableOpacity>
 
                     <TouchableOpacity style={botonItem}>
-                      <View style={viewOptionItem}>
+                      <View style={viewOptionItem}
+                        onPress={()=>{
+
+                            Alert.alert('hola mundo');
+
+                        }}
+
+                      >
                         <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>¥</Text>
                         <Text style={{fontSize:15,color:'white'}}>Logout</Text>
                       </View>
@@ -160,7 +174,10 @@ export default class Ini extends Component{
                         <Text style={{fontSize:15,color:'white'}}>Cuenta</Text>
                       </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={botonItem}>
+                    <TouchableOpacity style={botonItem}
+                      onPress={this.props.logout}
+
+                    >
                       <View style={viewOptionItem}>
                         <Text style={{color:'rgb(26,184,213)',fontSize:30, marginRight:7}}>¥</Text>
                         <Text style={{fontSize:15,color:'white'}}>Logout</Text>

@@ -202,7 +202,7 @@ RNFetchBlob.fetch('POST', 'http:\//167.71.173.198:3000/config', {
 					<ScrollView>
   					<View style={{width:'100%',height:800,backgroundColor:'#1159BF'}}>
                 <ImageBackground source={image} style={{width:'100%',height:'100%'}}>
-                  <TouchableOpacity onPress={()=>{this.props.callback('ini',null);}} >
+                  <TouchableOpacity onPress={()=>{this.props.callback('dashboard',null);}} >
                     <View style={{disply:'flex',flexDireccion:'row', marginTop:20}}>
                       <Text style={{color:'white',fontSize:20}}>Retroceder</Text>
                     </View>

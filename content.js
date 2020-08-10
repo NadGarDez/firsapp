@@ -25,6 +25,7 @@ export default class Content extends Component{
 		}
 		this.cambiarEstado= this.cambiarEstado.bind(this);
 		this.actualizarUser= this.actualizarUser.bind(this);
+		this.logout= this.logout.bind(this);
 	}
 	
 	
@@ -44,6 +45,18 @@ export default class Content extends Component{
 		this.state.user.rol=rol;
 		this.forceUpdate();
 		console.log(this.state.user);
+
+	}
+
+	logout(){
+
+		this.state.user.id= "";
+		this.state.user.rol="";
+		this.forceUpdate();
+		this.cambiarEstado('ini',null);
+		
+		
+
 
 	}
 	
@@ -78,7 +91,7 @@ export default class Content extends Component{
 				
 				return (
 					// codigo JSX
-					<Dash nombreUser={this.state.nombreUser} callback={this.cambiarEstado} credenciales={this.state.user}/>
+					<Dash nombreUser={this.state.nombreUser} callback={this.cambiarEstado} credenciales={this.state.user} logout={this.logout}/>
 				
 				);
 			
@@ -102,7 +115,7 @@ export default class Content extends Component{
 			
 				return (
 					// codigo JSX
-          			<Configuracion callback={this.cambiarEstado} credenciales={this.state.user}/>
+          			<Configuracion callback={this.cambiarEstado} credenciales={this.state.user} />
 				);
 				
 			break;
